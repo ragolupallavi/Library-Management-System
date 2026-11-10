@@ -32,7 +32,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo 'Building Library Management System Docker image'
-                bat 'docker build -t library-management-system .'
+               bat '"C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t library-management-system .'
             }
         }
     }
