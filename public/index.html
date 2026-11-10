@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Library Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>📚 Library Management System</h1>
+        <p>Manage your library efficiently</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Dashboard -->
+        <section class="dashboard-section">
+
+            <h2>Dashboard</h2>
+
+            <div class="stats">
+
+                <div class="card">
+                    <h3>Total Books</h3>
+                    <p id="totalBooks">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Available Books</h3>
+                    <p id="availableBooks">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Issued Books</h3>
+                    <p id="issuedBooks">0</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Add New Book -->
+        <section class="form-section">
+
+            <h2>Add New Book</h2>
+
+            <form id="bookForm">
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Enter Book Title"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="author"
+                    placeholder="Enter Author Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="category"
+                    placeholder="Enter Category"
+                    required
+                >
+
+                <input
+                    type="number"
+                    id="quantity"
+                    placeholder="Enter Quantity"
+                    min="1"
+                    step="1"
+                    required
+                >
+
+                <button type="submit">Add Book</button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Book Records -->
+        <section class="books-section">
+
+            <h2>Book Records</h2>
+
+            <!-- Search Books -->
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by title, author or category..."
+            >
+
+            <!-- Books Table -->
+            <table id="bookTable">
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Available</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- Book records will be loaded from MySQL -->
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
