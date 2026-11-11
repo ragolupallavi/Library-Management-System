@@ -32,18 +32,24 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo 'Building Library Management System Docker image'
-               bat '"C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t library-management-system .'
+
+                bat '"C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t library-management-system .'
             }
         }
-                stage('Deploy') {
+
+        stage('Deploy') {
             steps {
                 echo 'Deploying Library Management System using Docker Compose'
 
                 withCredentials([string(credentialsId: 'db-password', variable: 'DB_PASSWORD')]) {
+
                     bat '''
                         "C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker-compose.exe" -p library-management-system up -d --build
+                    '''
+
                 }
             }
         }
+
     }
 }
