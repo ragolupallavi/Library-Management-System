@@ -37,17 +37,34 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Docker Compose Deploy') {
             steps {
-                echo 'Deploying Library Management System using Docker Compose'
+                echo 'Deploying using Docker Compose'
 
                 withCredentials([string(credentialsId: 'db-password', variable: 'DB_PASSWORD')]) {
 
                     bat '''
                         "C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker-compose.exe" -p library-management-system up -d --build
                     '''
-
                 }
+            }
+        }
+
+        stage('Kubernetes Deploy') {
+            steps {
+                echo 'Building Kubernetes application image'
+
+                bat '''
+                    set "KUBECONFIG=C:\\Windows\\System32\\config\\systemprofile\\.kube\\config"
+
+                    "C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t library-management-k8s:%BUILD_NUMBER% .
+
+                    "C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" set image deployment/library-deployment library-container=library-management-k8s:%BUILD_NUMBER%
+
+                    "C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" rollout status deployment/library-deployment --timeout=180s
+
+                    "C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\kubectl.exe" get pods
+                '''
             }
         }
 
