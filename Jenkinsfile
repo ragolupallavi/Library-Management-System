@@ -41,8 +41,7 @@ pipeline {
 
                 withCredentials([string(credentialsId: 'db-password', variable: 'DB_PASSWORD')]) {
                     bat '''
-                        "C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" compose -p library-management-system up -d --build
-                    '''
+                        "C:\\Users\\Pallavi\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker-compose.exe" -p library-management-system up -d --build
                 }
             }
         }
