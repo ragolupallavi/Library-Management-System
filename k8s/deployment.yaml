@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: library-deployment
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: library
+
+  template:
+    metadata:
+      labels:
+        app: library
+
+    spec:
+      containers:
+        - name: library-container
+          image: library-management-k8s:v1
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: PORT
+              value: "5000"
+
+            - name: DB_HOST
+              value: "host.docker.internal"
+
+            - name: DB_PORT
+              value: "3307"
+
+            - name: DB_USER
+              value: "root"
+
+            - name: DB_NAME
+              value: "library_management"
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: library-db-secret
+                  key: DB_PASSWORD
